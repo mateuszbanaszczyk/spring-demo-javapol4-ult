@@ -22,3 +22,7 @@ public class MyFirstController {
         return "post";
     }
 }
+// MVC pattern
+// V - htmls
+// C - controller
+// M - model: Service and Repository
