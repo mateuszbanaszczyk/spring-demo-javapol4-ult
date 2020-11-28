@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/first controller")
+@RequestMapping("/first-controller")
 public class MyFirstController {
 
     @GetMapping("/home-page")
