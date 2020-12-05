@@ -19,6 +19,7 @@ public class CoffeeMachineRepository {
         List<CoffeeMachine> result3 = new ArrayList<>();
         List<CoffeeMachine> result4 = new ArrayList<CoffeeMachine>(); //Java 6
         var samsung = CoffeeMachine.builder()
+                .id(1L)
                 .capacityInMl(1_000)
                 .vendor("Samsung")
                 .milky(true)
@@ -27,12 +28,15 @@ public class CoffeeMachineRepository {
 
         var delonge = CoffeeMachine.builder()
 .vendor("Delonge")
+                .id(2L)
                 .capacityInMl(50)
                 .milky(false)
                 .build();
         result.add(delonge);
 
         var kafeteria = CoffeeMachine.builder()
+
+                .id(3L)
                 .capacityInMl(750)
                 .milky(true)
                 .vendor("home-made")
