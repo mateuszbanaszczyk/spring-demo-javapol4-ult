@@ -2,11 +2,14 @@ package pl.sda.javapol4.springdemojavapol4.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.javapol4.springdemojavapol4.entity.CoffeeMachine;
 import pl.sda.javapol4.springdemojavapol4.service.CoffeeMachineService;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +49,14 @@ public class RestCoffeMachineController {
 return null;
     }
 @PostMapping("/coffee-machines")
-    public CoffeeMachine createCoffeeMachine(@RequestBody CoffeeMachine objectToSave) {
+//@ResponseStatus(HttpStatus.CREATED)
+//    public CoffeeMachine createCoffeeMachine(@RequestBody CoffeeMachine objectToSave) {
+   public ResponseEntity<CoffeeMachine> createCoffeeMachine(@RequestBody CoffeeMachine objectToSave){
         log.info("saving new coffee machine: [{}]", objectToSave);
 
-//        TODO: save object
-
-    objectToSave.setId(5L);
-    return objectToSave;
+        var saved = coffeeMachineService.saveCoffeeMachine(objectToSave);
+return ResponseEntity.created(URI.create("/rest/coffee-machines/" + saved.getId()))
+   .body(saved);
 }
 
 
@@ -68,9 +72,12 @@ return null;
  * CRUD
  * Read - GET /coffee-machines - all
  * Read One - GET /coffee-machines/{id} - one
- * Create - POST - /coffee-machines
- * Delete - DELETE /coffee-machines/{id}
+ * Create - POST - /coffee-machines -> 201 + Location header
+ * Delete - DELETE /coffee-machines/{id} -> 204
  * Update - PATCH - partial update /coffee-machines/{id}
  * Update - PUT - replace /coffee-machines/{id}
+ * Error: -> 404 - not found
+ * 401 - autentication
+ * 403 - authorization
  */
 }
